@@ -1,0 +1,176 @@
+<!-- TODO Keyboard fixme -->
+<!-- TODO Clean up the keyboard -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shortcut</title>
+  </head>
+  <body>
+    <h1 id="action"></h1>
+    <div class="" id="countDownTimer">60</div>
+    <div class="" id="answer"></div>
+    <button id="start">start</button>
+    <button id="hint">hint</button>
+    <div class="" id="scoreCard"></div>
+
+    <section class="keyboard">
+      <div class="keyboard__top">
+        <div class="keyboard--btns" data-code="ControlLeft" data-kor="ㅂ">
+          <div class="keyboard--english">q</div>
+          <div class="keyboard--korean">
+            ㅂ <span class="keyboard--alt">ㅃ</span>
+          </div>
+        </div>
+        <div class="keyboard--btns" data-id="87" data-kor="ㅈ">
+          <div class="keyboard--english">w</div>
+          <div class="keyboard--korean">
+            ㅈ <span class="keyboard--alt">ㅉ</span>
+          </div>
+        </div>
+        <div class="keyboard--btns" data-id="69" data-kor="ㄷ">
+          <div class="keyboard--english">e</div>
+          <div class="keyboard--korean">
+            ㄷ <span class="keyboard--alt">ㄸ</span>
+          </div>
+        </div>
+        <div class="keyboard--btns" data-id="82" data-kor="ㄱ">
+          <div class="keyboard--english">r</div>
+          <div class="keyboard--korean">
+            ㄱ <span class="keyboard--alt">ㄲ</span>
+          </div>
+        </div>
+        <div class="keyboard--btns" data-id="84" data-kor="ㅅ">
+          <div class="keyboard--english">t</div>
+          <div class="keyboard--korean">
+            ㅅ <span class="keyboard--alt">ㅆ</span>
+          </div>
+        </div>
+        <div class="keyboard--btns" data-id="89" data-kor="ㅛ">
+          <div class="keyboard--english">y</div>
+          <div class="keyboard--korean">ㅛ</div>
+        </div>
+        <div class="keyboard--btns" data-id="85" data-kor="ㅕ">
+          <div class="keyboard--english">u</div>
+          <div class="keyboard--korean">ㅕ</div>
+        </div>
+        <div class="keyboard--btns" data-id="73" data-kor="ㅑ">
+          <div class="keyboard--english">i</div>
+          <div class="keyboard--korean">ㅑ</div>
+        </div>
+        <div class="keyboard--btns" data-id="79" data-kor="ㅐ">
+          <div class="keyboard--english">o</div>
+          <div class="keyboard--korean">ㅐ</div>
+        </div>
+        <div class="keyboard--btns" data-id="80" data-kor="ㅔ">
+          <div class="keyboard--english">p</div>
+          <div class="keyboard--korean">ㅔ</div>
+        </div>
+        <div class="keyboard--btns" data-id="219" data-kor="[">
+          <div class="keyboard--english">[</div>
+          <div class="keyboard--korean">{</div>
+        </div>
+        <div class="keyboard--btns" data-id="221" data-kor="]">
+          <div class="keyboard--english">]</div>
+          <div class="keyboard--korean">}</div>
+        </div>
+      </div>
+      <div class="keyboard__middle">
+        <div class="keyboard--btns" data-code="KeyA" data-kor="ㅁ">
+          <div class="keyboard--english">a</div>
+          <div class="keyboard--korean">ㅁ</div>
+        </div>
+        <div class="keyboard--btns" data-id="83" data-kor="ㄴ">
+          <div class="keyboard--english">s</div>
+          <div class="keyboard--korean">ㄴ</div>
+        </div>
+        <div class="keyboard--btns" data-id="68" data-kor="ㅇ">
+          <div class="keyboard--english">d</div>
+          <div class="keyboard--korean">ㅇ</div>
+        </div>
+        <div class="keyboard--btns" data-id="70" data-kor="ㄹ">
+          <div class="keyboard--english">f</div>
+          <div class="keyboard--korean">ㄹ</div>
+        </div>
+        <div class="keyboard--btns" data-id="71" data-kor="ㅎ">
+          <div class="keyboard--english">g</div>
+          <div class="keyboard--korean">ㅎ</div>
+        </div>
+        <div class="keyboard--btns" data-id="72" data-kor="ㅗ">
+          <div class="keyboard--english">h</div>
+          <div class="keyboard--korean">ㅗ</div>
+        </div>
+        <div class="keyboard--btns" data-id="74" data-kor="ㅓ">
+          <div class="keyboard--english">j</div>
+          <div class="keyboard--korean">ㅓ</div>
+        </div>
+        <div class="keyboard--btns" data-id="75" data-kor="ㅏ">
+          <div class="keyboard--english">k</div>
+          <div class="keyboard--korean">ㅏ</div>
+        </div>
+        <div class="keyboard--btns" data-id="76" data-kor="ㅣ">
+          <div class="keyboard--english">l</div>
+          <div class="keyboard--korean">ㅣ</div>
+        </div>
+        <div class="keyboard--btns" data-id="59" daㅣa-kor=";">
+          <div class="keyboard--english">:</div>
+          <div class="keyboard--korean">;</div>
+        </div>
+        <div class="keyboard--btns" data-id="222" data-kor="'">
+          <div class="keyboard--english">@</div>
+          <div class="keyboard--korean">'</div>
+        </div>
+        <div class="keyboard--btns" data-id="163" data-kor="\">
+          <div class="keyboard--english">~</div>
+          <div class="keyboard--korean">#</div>
+        </div>
+      </div>
+      <div class="keyboard__bottom">
+        <div class="keyboard--btns" data-id="90" data-kor="ㅋ">
+          <div class="keyboard--english">z</div>
+          <div class="keyboard--korean">ㅋ</div>
+        </div>
+        <div class="keyboard--btns" data-id="88" data-kor="ㅌ">
+          <div class="keyboard--english">x</div>
+          <div class="keyboard--korean">ㅌ</div>
+        </div>
+        <div class="keyboard--btns" data-id="67" data-kor="ㅊ">
+          <div class="keyboard--english">c</div>
+          <div class="keyboard--korean">ㅊ</div>
+        </div>
+        <div class="keyboard--btns" data-id="86" data-kor="ㅍ">
+          <div class="keyboard--english">v</div>
+          <div class="keyboard--korean">ㅍ</div>
+        </div>
+        <div class="keyboard--btns" data-id="66" data-kor="ㅠ">
+          <div class="keyboard--english">b</div>
+          <div class="keyboard--korean">ㅠ</div>
+        </div>
+        <div class="keyboard--btns" data-id="78" data-kor="ㅜ">
+          <div class="keyboard--english">n</div>
+          <div class="keyboard--korean">ㅜ</div>
+        </div>
+        <div class="keyboard--btns" data-id="77" data-kor="ㅡ">
+          <div class="keyboard--english">m</div>
+          <div class="keyboard--korean">ㅡ</div>
+        </div>
+        <div class="keyboard--btns" data-id="188" data-kor=",">
+          <div class="keyboard--english"><</div>
+          <div class="keyboard--korean">,</div>
+        </div>
+        <div class="keyboard--btns" data-id="190" data-kor=".">
+          <div class="keyboard--english">></div>
+          <div class="keyboard--korean">.</div>
+        </div>
+        <div class="keyboard--btns" data-id="191" data-kor="/">
+          <div class="keyboard--english">?</div>
+          <div class="keyboard--korean">/</div>
+        </div>
+      </div>
+    </section>
+    <script src="app.js"></script>
+  </body>
+</html>
