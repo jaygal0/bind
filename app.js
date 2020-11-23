@@ -95,68 +95,92 @@ const action = document.getElementById('action')
 const startBtn = document.getElementById('start')
 const countDownTimer = document.getElementById('countDownTimer')
 const answer = document.getElementById('answer')
+const showHintsAllowed = document.getElementById('hintsAllowed')
 const hintBtn = document.getElementById('hint')
 const scoreCard = document.getElementById('scoreCard')
-const keyboardBtns = document.querySelectorAll('.keyboard--btns')
+const keyboardBtns = document.querySelectorAll('.keyboard__btns')
+
 let time = 60
 let score = 0
+let hintsAllowed = 5
+let random
 
 startBtn.addEventListener('click', () => {
   startGame()
   countDown()
+  showHintsAllowed.innerHTML = hintsAllowed
+
+  if (startBtn.innerHTML === 'play again') {
+    score = 0
+    hintsAllowed = 5
+    time = 60
+    showHintsAllowed.innerHTML = hintsAllowed
+  }
 })
 
-const startGame = () => {
-  const random = Math.floor(Math.random() * shortcut.length)
+// A function to create a random number
+function randomNo() {
+  random = Math.floor(Math.random() * shortcut.length)
+}
+
+function startGame() {
+  randomNo()
 
   // To question the user
-  action.innerText = shortcut[0].action
+  action.innerText = shortcut[random].action
 
   //   To check if the user has typed in the correct shortcut
   window.addEventListener('keydown', (e) => {
     e.preventDefault()
     if (
-      e.code === shortcut[0].code &&
-      e.ctrlKey === shortcut[0].ctrlKey &&
-      e.shiftKey === shortcut[0].shiftKey &&
-      e.altKey === shortcut[0].altKey
+      e.code === shortcut[random].code &&
+      e.ctrlKey === shortcut[random].ctrlKey &&
+      e.shiftKey === shortcut[random].shiftKey &&
+      e.altKey === shortcut[random].altKey
     ) {
       score++
       startGame()
     }
   })
-
-  //   To show the hint when the hint button is pressed
-  hintBtn.addEventListener('click', () => {
-    hint()
-  })
-
-  //   Function to show the hint in text and highlight the interactive keyboard
-  const hint = () => {
-    answer.innerHTML = shortcut[0].hint
-    // FIXME Clean up the code to higlight the keyboard
-    keyboardBtns.forEach((btn) => {
-      if (btn.dataset.code === shortcut[0].code) {
-        btn.classList.add('activeBtn')
-      }
-      if (shortcut[0].ctrlKey && btn.dataset.code === 'ControlLeft') {
-        btn.classList.add('activeBtn')
-      }
-    })
-    setTimeout(() => {
-      answer.innerHTML = ''
-      keyboardBtns.forEach((btn) => {
-        if (btn.dataset.code === shortcut[0].code) {
-          btn.classList.remove('activeBtn')
-        }
-        if (shortcut[0].ctrlKey && btn.dataset.code === 'ControlLeft') {
-          btn.classList.remove('activeBtn')
-        }
-      })
-    }, 1000)
-  }
 }
 
+//   Function to show the hint in text and highlight the interactive keyboard
+function hint() {
+  answer.innerHTML = shortcut[random].hint
+  keyboardBtns.forEach((btn) => {
+    if (btn.dataset.code === shortcut[random].code) {
+      btn.classList.add('activeBtn')
+
+      setTimeout(() => {
+        answer.innerHTML = ''
+        btn.classList.remove('activeBtn')
+      }, 1000)
+    }
+    if (shortcut[random].ctrlKey && btn.dataset.code === 'ControlLeft') {
+      btn.classList.add('activeBtn')
+      setTimeout(() => {
+        answer.innerHTML = ''
+        btn.classList.remove('activeBtn')
+      }, 1000)
+    }
+    if (shortcut[random].shiftKey && btn.dataset.code === 'ShiftLeft') {
+      btn.classList.add('activeBtn')
+      setTimeout(() => {
+        answer.innerHTML = ''
+        btn.classList.remove('activeBtn')
+      }, 1000)
+    }
+    if (shortcut[random].altKey && btn.dataset.code === 'AltLeft') {
+      btn.classList.add('activeBtn')
+      setTimeout(() => {
+        answer.innerHTML = ''
+        btn.classList.remove('activeBtn')
+      }, 1000)
+    }
+  })
+}
+
+// Function to start a count down timer
 function countDown() {
   setInterval(() => {
     if (time <= 0) {
@@ -166,11 +190,28 @@ function countDown() {
     time -= 1
 
     if (time === 0) {
-      action.innerHTML = 'hit start'
-      scoreCard.innerHTML = `you completed ${score} questions`
+      action.innerHTML = 'play again'
+      startBtn.innerHTML = 'play again'
+      if (score <= 10) {
+        scoreCard.innerHTML = `C'mon you can do better! You only answered ${score} questions correctly.`
+      } else if (score >= 10 && score <= 20) {
+        scoreCard.innerHTML = `Not bad, you answered ${score} questions correctly.`
+      } else if (score > 20) {
+        scoreCard.innerHTML = `Well done! You answered ${score} questions correctly.`
+      }
     }
   }, 1000)
 }
+
+//   To show the hint when the hint button is pressed
+hintBtn.addEventListener('click', () => {
+  //   Only allow the user to get a hint if they have enough hints left
+  if (hintsAllowed > 0) {
+    hintsAllowed--
+    showHintsAllowed.innerHTML = hintsAllowed
+    hint()
+  }
+})
 
 // Figuring out the keyboard interaction
 keyboardBtns.forEach((btn) => {

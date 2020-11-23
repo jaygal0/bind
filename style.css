@@ -1,6 +1,5 @@
 .keyboard {
   display: flex;
-  grid-column: 1 / -1;
   grid-row: 5 / span 1;
   justify-content: center;
   flex-direction: column;
@@ -8,20 +7,18 @@
   font-family: 'Varela Round', sans-serif;
 }
 
-.keyboard__top,
-.keyboard__middle,
-.keyboard__bottom {
+/* .keyboard__middle {
+  transform: translate(20px);
+} */
+
+.keyboard__row {
   display: flex;
-  justify-content: center;
 }
 
-.keyboard__middle {
-  transform: translate(20px);
-}
-.keyboard--btns {
+.keyboard__btns {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 50px;
   width: 50px;
   border-radius: 5px;
@@ -30,25 +27,20 @@
   background: #227c9d;
 }
 
-.keyboard--english {
-  text-transform: uppercase;
-  color: white;
-  margin-top: 5px;
-  margin-left: 5px;
+.longbtn {
+  width: 70px;
 }
 
-.keyboard--korean {
-  display: flex;
-  justify-content: flex-end;
-  color: #ffca00;
-  padding: 5px;
-  font-size: 1.2rem;
+.longerbtn {
+  width: 90px;
 }
 
-.keyboard--alt {
-  color: white;
+.tabbtn {
+  width: 100px;
 }
-
+.spacebtn {
+  width: 500px;
+}
 .activeBtn {
   background: #ffcb77;
 }
