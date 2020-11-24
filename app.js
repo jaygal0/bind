@@ -1,96 +1,5 @@
-const shortcut = [
-  {
-    code: 'KeyA',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: false,
-    action: 'Select all content.',
-    shortcut: 'essential',
-    hint: 'Ctrl + A',
-  },
-  {
-    code: 'KeyC',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: false,
-    action: 'Copy selected items to clipboard.',
-    shortcut: 'essential',
-    hint: 'Ctrl + C',
-  },
-  {
-    code: 'KeyX',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: false,
-    action: 'Cut selected items to clipboard.',
-    shortcut: 'essential',
-    hint: 'Ctrl + X',
-  },
-  {
-    code: 'KeyV',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: false,
-    action: 'Paste content from clipboard.',
-    shortcut: 'essential',
-    hint: 'Ctrl + V',
-  },
-  {
-    code: 'KeyZ',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: false,
-    action: 'Undo an action, including undelete files (limited).',
-    shortcut: 'essential',
-    hint: 'Ctrl + Z',
-  },
-  {
-    code: 'KeyZ',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: true,
-    action: 'Redo an action.',
-    shortcut: 'essential',
-    hint: 'Ctrl + Shift + Z',
-  },
-  {
-    code: 'KeyN',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: true,
-    action: 'Create new folder on desktop or File Explorer.',
-    shortcut: 'essential',
-    hint: 'Ctrl + Shift + N',
-  },
-  {
-    code: 'KeyD',
-    altKey: false,
-    ctrlKey: true,
-    shiftKey: false,
-    action: 'Delete selected item to the Recycle Bin.',
-    shortcut: 'essential',
-    hint: 'Ctrl + D',
-  },
-  {
-    code: 'F2',
-    altKey: false,
-    ctrlKey: false,
-    shiftKey: false,
-    action: 'Rename selected item.',
-    shortcut: 'essential',
-    hint: 'F2',
-  },
-  {
-    code: 'Escape',
-    altKey: false,
-    ctrlKey: false,
-    shiftKey: false,
-    action: 'Close current task.',
-    shortcut: 'essential',
-    hint: 'ESC',
-  },
-]
-
+const hints = 3
+const timeLimit = 60
 const action = document.getElementById('action')
 const startBtn = document.getElementById('start')
 const countDownTimer = document.getElementById('countDownTimer')
@@ -102,22 +11,35 @@ const keyboardBtns = document.querySelectorAll('.keyboard__btns')
 const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/230539129389c89661216a583617bba7ecef3272/shortcut.json'
 
-const hints = 3
-const timeLimit = 10
+let shortcut
 let game
+
+// ON WINDOW LOAD ////////
+function retrieve() {
+  return fetch(url)
+    .then((response) => response.json())
+    .then((data) =>
+      data.filter((item) => {
+        return item
+      })
+    )
+}
+
+async function shortcutList() {
+  shortcut = await retrieve()
+}
+
+window.onload = () => {
+  retrieve()
+  shortcutList()
+}
 
 // EVENT LISTENERS //////////
 startBtn.addEventListener('click', () => {
-  if (startBtn.innerText === 'start') {
-    game = new Shortcut(timeLimit, hints)
-    game.startGame()
-    game.countDown()
-    startBtn.innerText = 'reset'
-  } else {
-    game.reset()
-    game.startGame()
-    game.countDown()
-  }
+  game = new Shortcut(timeLimit, hints)
+  game.reset()
+  game.startGame()
+  game.countDown()
 })
 
 //   To show the hint when the hint button is pressed
@@ -238,6 +160,6 @@ class Shortcut {
     this.score = 0
     this.hintsAllowed = hints
     showHintsAllowed.innerHTML = this.hintsAllowed
-    clearInterval(countDown)
+    clearInterval(this.countDown)
   }
 }
