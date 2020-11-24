@@ -99,118 +99,31 @@ const showHintsAllowed = document.getElementById('hintsAllowed')
 const hintBtn = document.getElementById('hint')
 const scoreCard = document.getElementById('scoreCard')
 const keyboardBtns = document.querySelectorAll('.keyboard__btns')
+const url =
+  'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/230539129389c89661216a583617bba7ecef3272/shortcut.json'
 
-let time = 60
-let score = 0
-let hintsAllowed = 5
-let random
+const hints = 3
+const timeLimit = 10
+let game
 
+// EVENT LISTENERS //////////
 startBtn.addEventListener('click', () => {
-  startGame()
-  countDown()
-  showHintsAllowed.innerHTML = hintsAllowed
-
-  if (startBtn.innerHTML === 'play again') {
-    score = 0
-    hintsAllowed = 5
-    time = 60
-    showHintsAllowed.innerHTML = hintsAllowed
+  if (startBtn.innerText === 'start') {
+    game = new Shortcut(timeLimit, hints)
+    game.startGame()
+    game.countDown()
+    startBtn.innerText = 'reset'
+  } else {
+    game.reset()
+    game.startGame()
+    game.countDown()
   }
 })
-
-// A function to create a random number
-function randomNo() {
-  random = Math.floor(Math.random() * shortcut.length)
-}
-
-function startGame() {
-  randomNo()
-
-  // To question the user
-  action.innerText = shortcut[random].action
-
-  //   To check if the user has typed in the correct shortcut
-  window.addEventListener('keydown', (e) => {
-    e.preventDefault()
-    if (
-      e.code === shortcut[random].code &&
-      e.ctrlKey === shortcut[random].ctrlKey &&
-      e.shiftKey === shortcut[random].shiftKey &&
-      e.altKey === shortcut[random].altKey
-    ) {
-      score++
-      startGame()
-    }
-  })
-}
-
-//   Function to show the hint in text and highlight the interactive keyboard
-function hint() {
-  answer.innerHTML = shortcut[random].hint
-  keyboardBtns.forEach((btn) => {
-    if (btn.dataset.code === shortcut[random].code) {
-      btn.classList.add('activeBtn')
-
-      setTimeout(() => {
-        answer.innerHTML = ''
-        btn.classList.remove('activeBtn')
-      }, 1000)
-    }
-    if (shortcut[random].ctrlKey && btn.dataset.code === 'ControlLeft') {
-      btn.classList.add('activeBtn')
-      setTimeout(() => {
-        answer.innerHTML = ''
-        btn.classList.remove('activeBtn')
-      }, 1000)
-    }
-    if (shortcut[random].shiftKey && btn.dataset.code === 'ShiftLeft') {
-      btn.classList.add('activeBtn')
-      setTimeout(() => {
-        answer.innerHTML = ''
-        btn.classList.remove('activeBtn')
-      }, 1000)
-    }
-    if (shortcut[random].altKey && btn.dataset.code === 'AltLeft') {
-      btn.classList.add('activeBtn')
-      setTimeout(() => {
-        answer.innerHTML = ''
-        btn.classList.remove('activeBtn')
-      }, 1000)
-    }
-  })
-}
-
-// Function to start a count down timer
-function countDown() {
-  setInterval(() => {
-    if (time <= 0) {
-      clearInterval((time = 0))
-    }
-    countDownTimer.innerHTML = time
-    time -= 1
-
-    if (time === 0) {
-      action.innerHTML = 'play again'
-      startBtn.innerHTML = 'play again'
-      if (score <= 10) {
-        scoreCard.innerHTML = `C'mon you can do better! You only answered ${score} questions correctly.`
-      } else if (score >= 10 && score <= 20) {
-        scoreCard.innerHTML = `Not bad, you answered ${score} questions correctly.`
-      } else if (score > 20) {
-        scoreCard.innerHTML = `Well done! You answered ${score} questions correctly.`
-      }
-    }
-  }, 1000)
-}
 
 //   To show the hint when the hint button is pressed
 hintBtn.addEventListener('click', () => {
   //   Only allow the user to get a hint if they have enough hints left
-  if (hintsAllowed > 0) {
-    hintsAllowed--
-    showHintsAllowed.innerHTML = hintsAllowed
-    hint()
-  }
+  game.showHint()
 })
 
 // Figuring out the keyboard interaction
@@ -226,3 +139,105 @@ keyboardBtns.forEach((btn) => {
     }
   })
 })
+
+// CLASS //////////
+class Shortcut {
+  constructor(time, hints) {
+    this.timeLimit = time
+    this.score = 0
+    this.hintsAllowed = hints
+    this.random
+  }
+  randomNo() {
+    this.random = Math.floor(Math.random() * shortcut.length)
+  }
+  startGame() {
+    this.randomNo()
+
+    action.innerText = shortcut[this.random].action
+    showHintsAllowed.innerHTML = this.hintsAllowed
+
+    window.addEventListener('keydown', (e) => {
+      e.preventDefault()
+      if (
+        e.code === shortcut[this.random].code &&
+        e.ctrlKey === shortcut[this.random].ctrlKey &&
+        e.shiftKey === shortcut[this.random].shiftKey &&
+        e.altKey === shortcut[this.random].altKey
+      ) {
+        this.score++
+        this.startGame()
+      }
+    })
+  }
+  hint() {
+    answer.innerHTML = shortcut[this.random].hint
+
+    keyboardBtns.forEach((btn) => {
+      if (btn.dataset.code === shortcut[this.random].code) {
+        btn.classList.add('activeBtn')
+
+        setTimeout(() => {
+          answer.innerHTML = ''
+          btn.classList.remove('activeBtn')
+        }, 1000)
+      }
+      if (shortcut[this.random].ctrlKey && btn.dataset.code === 'ControlLeft') {
+        btn.classList.add('activeBtn')
+        setTimeout(() => {
+          answer.innerHTML = ''
+          btn.classList.remove('activeBtn')
+        }, 1000)
+      }
+      if (shortcut[this.random].shiftKey && btn.dataset.code === 'ShiftLeft') {
+        btn.classList.add('activeBtn')
+        setTimeout(() => {
+          answer.innerHTML = ''
+          btn.classList.remove('activeBtn')
+        }, 1000)
+      }
+      if (shortcut[this.random].altKey && btn.dataset.code === 'AltLeft') {
+        btn.classList.add('activeBtn')
+        setTimeout(() => {
+          answer.innerHTML = ''
+          btn.classList.remove('activeBtn')
+        }, 1000)
+      }
+    })
+  }
+  showHint() {
+    if (this.hintsAllowed > 0) {
+      this.hintsAllowed--
+      showHintsAllowed.innerHTML = this.hintsAllowed
+      this.hint()
+    }
+  }
+  countDown() {
+    setInterval(() => {
+      if (this.timeLimit <= 0) {
+        clearInterval((this.timeLimit = 0))
+      }
+      countDownTimer.innerHTML = this.timeLimit
+      this.timeLimit -= 1
+
+      if (this.timeLimit === 0) {
+        action.innerHTML = 'play again'
+        startBtn.innerHTML = 'play again'
+        if (this.score <= 10) {
+          scoreCard.innerHTML = `C'mon you can do better! You only answered ${this.score} questions correctly.`
+        } else if (this.score >= 10 && this.score <= 20) {
+          scoreCard.innerHTML = `Not bad, you answered ${this.score} questions correctly.`
+        } else if (this.score > 20) {
+          scoreCard.innerHTML = `Well done! You answered ${this.score} questions correctly.`
+        }
+      }
+    }, 1000)
+  }
+  reset() {
+    this.timeLimit = timeLimit
+    this.score = 0
+    this.hintsAllowed = hints
+    showHintsAllowed.innerHTML = this.hintsAllowed
+    clearInterval(countDown)
+  }
+}
