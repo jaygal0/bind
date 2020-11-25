@@ -7,8 +7,7 @@ const hintBtn = document.getElementById('hint')
 const scoreCard = document.getElementById('scoreCard')
 const keyboardBtns = document.querySelectorAll('.keyboard__btns')
 const url =
-  'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/230539129389c89661216a583617bba7ecef3272/shortcut.json'
-
+  'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/7d4cd8e5b9c77dbdb7c09152a44d7082d0c54f7f/shortcut.json'
 const hints = 3
 const timeLimit = 30
 
