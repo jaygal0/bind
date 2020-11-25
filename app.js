@@ -10,12 +10,13 @@ const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/230539129389c89661216a583617bba7ecef3272/shortcut.json'
 
 const hints = 3
-const timeLimit = 60
+const timeLimit = 30
 
 let shortcut
 let game
 
 // ON WINDOW LOAD ////////
+// Function to retrieve the JSON data
 function retrieve() {
   return fetch(url)
     .then((response) => response.json())
@@ -30,25 +31,37 @@ async function shortcutList() {
   shortcut = await retrieve()
 }
 
+// To load the function when you enter the site
 window.onload = () => {
   retrieve()
   shortcutList()
 }
 
+// To show the user the time allowed
+countDownTimer.innerText = timeLimit
+
 // EVENT LISTENERS //////////
+// To start or restart the timer and start a game
 startBtn.addEventListener('click', () => {
-  game = new Shortcut(timeLimit, hints)
-  game.reset()
-  game.countDown()
-  game.startGame()
+  if (startBtn.innerText === 'start') {
+    game = new Shortcut(timeLimit, hints)
+    game.countDown()
+    game.startGame()
+    startBtn.innerText = 'restart'
+  } else {
+    game.reset()
+    game.startGame()
+    startBtn.innerText = 'restart'
+    scoreCard.innerText = ''
+  }
 })
 
+// To show the keyboard hint when the hint button is pressed
 hintBtn.addEventListener('click', () => {
-  //   Only allow the user to get a hint if they have enough hints left
   game.showHint()
 })
 
-// Figuring out the keyboard interaction
+// To show the user interacting with the keyboard
 keyboardBtns.forEach((btn) => {
   window.addEventListener('keydown', (e) => {
     if (e.code == btn.dataset.code) {
@@ -143,8 +156,7 @@ class Shortcut {
       this.timeLimit -= 1
 
       if (this.timeLimit === 0) {
-        action.innerHTML = 'play again'
-        startBtn.innerHTML = 'play again'
+        action.innerHTML = 'hit restart to play again'
         if (this.score <= 10) {
           scoreCard.innerHTML = `C'mon you can do better! You only answered ${this.score} questions correctly.`
         } else if (this.score >= 10 && this.score <= 20) {
@@ -160,6 +172,5 @@ class Shortcut {
     this.score = 0
     this.hintsAllowed = hints
     showHintsAllowed.innerHTML = this.hintsAllowed
-    clearInterval(this.countDown)
   }
 }
