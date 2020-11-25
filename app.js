@@ -1,5 +1,3 @@
-const hints = 3
-const timeLimit = 60
 const action = document.getElementById('action')
 const startBtn = document.getElementById('start')
 const countDownTimer = document.getElementById('countDownTimer')
@@ -10,6 +8,9 @@ const scoreCard = document.getElementById('scoreCard')
 const keyboardBtns = document.querySelectorAll('.keyboard__btns')
 const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/230539129389c89661216a583617bba7ecef3272/shortcut.json'
+
+const hints = 3
+const timeLimit = 60
 
 let shortcut
 let game
@@ -38,11 +39,10 @@ window.onload = () => {
 startBtn.addEventListener('click', () => {
   game = new Shortcut(timeLimit, hints)
   game.reset()
-  game.startGame()
   game.countDown()
+  game.startGame()
 })
 
-//   To show the hint when the hint button is pressed
 hintBtn.addEventListener('click', () => {
   //   Only allow the user to get a hint if they have enough hints left
   game.showHint()
