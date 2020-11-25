@@ -7,10 +7,6 @@
   font-family: 'Varela Round', sans-serif;
 }
 
-/* .keyboard__middle {
-  transform: translate(20px);
-} */
-
 .keyboard__row {
   display: flex;
 }
@@ -43,4 +39,30 @@
 }
 .activeBtn {
   background: #ffcb77;
+}
+
+.progress-bar {
+  position: relative;
+  width: 600px;
+  height: 3em;
+  background-color: #111;
+  border-radius: 1.5em;
+  color: white;
+}
+
+.progress-bar::before {
+  content: attr(data-label);
+  display: flex;
+  align-items: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: absolute;
+  left: 0.5em;
+  top: 0.5em;
+  bottom: 0.5em;
+  width: calc(var(--width, 0) * 1%);
+  min-width: 1rem;
+  max-width: calc(100% - 3em);
+  background-color: #069;
+  border-radius: 1em;
+  padding: 1em;
 }

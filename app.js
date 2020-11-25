@@ -74,6 +74,21 @@ keyboardBtns.forEach((btn) => {
   })
 })
 
+const progressBar = document.getElementsByClassName('progress-bar')[0]
+
+function bar() {
+  setInterval(() => {
+    const computedStyle = getComputedStyle(progressBar)
+    const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
+    progressBar.style.setProperty('--width', width - 3.3)
+    console.log(width)
+  }, 1000)
+}
+
+function clearBar() {
+  clearInterval(bar)
+}
+
 // CLASS //////////
 class Shortcut {
   constructor(time, hints) {
