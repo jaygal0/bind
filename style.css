@@ -56,7 +56,7 @@
   width: 50vw;
   height: 3rem;
   background-color: #111;
-  /* border-radius: 1.5rem; */
+  border-radius: 1.5rem;
   color: white;
 }
 
@@ -72,8 +72,7 @@
   bottom: 0.5rem;
   width: calc(var(--width, 0) * 1%);
   min-width: 0rem;
-  max-width: calc(100% - 3rem);
+  max-width: calc(100% - 1rem);
   background-color: white;
-  /* border-radius: 1rem; */
-  padding: 1rem;
+  border-radius: 1.5rem;
 }

@@ -168,7 +168,7 @@ class Shortcut {
       if (width <= 0) {
         clearInterval(countNer)
       }
-      if (width === 0) {
+      if (width <= 0) {
         action.innerHTML = 'hit &#8634; to play again'
         if (this.score <= 10) {
           scoreCard.innerHTML = `C'mon you can do better! You only answered ${this.score} questions correctly.`
