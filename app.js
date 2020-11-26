@@ -1,6 +1,5 @@
 const action = document.getElementById('action')
 const startBtn = document.getElementById('start')
-const countDownTimer = document.getElementById('countDownTimer')
 const answer = document.getElementById('answer')
 const showHintsAllowed = document.getElementById('hintsAllowed')
 const hintBtn = document.getElementById('hint')
@@ -8,10 +7,18 @@ const scoreCard = document.getElementById('scoreCard')
 const keyboardBtns = document.querySelectorAll('.keyboard__btns')
 const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/7d4cd8e5b9c77dbdb7c09152a44d7082d0c54f7f/shortcut.json'
-const hints = 3
-const timeLimit = 30
+const progressBar = document.getElementsByClassName('progress-bar')[0]
 
+// To program the game difficulty
+const hints = 5
+const timeLimitSec = 30
+const timeCalc = 100 / timeLimitSec
+
+// For the timer
+let countNer
+// For the data
 let shortcut
+// To start a game
 let game
 
 // ON WINDOW LOAD ////////
@@ -26,31 +33,31 @@ function retrieve() {
     )
 }
 
+// To set shortcut to the JSON data
 async function shortcutList() {
   shortcut = await retrieve()
 }
 
-// To load the function when you enter the site
+// To load the above functions when you enter the site
 window.onload = () => {
   retrieve()
   shortcutList()
 }
 
-// To show the user the time allowed
-countDownTimer.innerText = timeLimit
-
 // EVENT LISTENERS //////////
-// To start or restart the timer and start a game
+// To start or restart the timer and game when the button is clicked
 startBtn.addEventListener('click', () => {
   if (startBtn.innerText === 'start') {
-    game = new Shortcut(timeLimit, hints)
-    game.countDown()
+    game = new Shortcut(timeCalc, hints)
     game.startGame()
-    startBtn.innerText = 'restart'
+    game.startTimer()
+    startBtn.innerHTML = '&#8634;'
   } else {
+    clearInterval(countNer)
+    progressBar.style.setProperty('--width', 100)
+    game.startTimer()
     game.reset()
     game.startGame()
-    startBtn.innerText = 'restart'
     scoreCard.innerText = ''
   }
 })
@@ -74,21 +81,6 @@ keyboardBtns.forEach((btn) => {
   })
 })
 
-const progressBar = document.getElementsByClassName('progress-bar')[0]
-
-function bar() {
-  setInterval(() => {
-    const computedStyle = getComputedStyle(progressBar)
-    const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
-    progressBar.style.setProperty('--width', width - 3.3)
-    console.log(width)
-  }, 1000)
-}
-
-function clearBar() {
-  clearInterval(bar)
-}
-
 // CLASS //////////
 class Shortcut {
   constructor(time, hints) {
@@ -98,6 +90,7 @@ class Shortcut {
     this.random
   }
   randomNo() {
+    // To generate a random number
     this.random = Math.floor(Math.random() * shortcut.length)
   }
   startGame() {
@@ -120,6 +113,7 @@ class Shortcut {
     })
   }
   hint() {
+    // To show the hint for a second
     answer.innerHTML = shortcut[this.random].hint
 
     keyboardBtns.forEach((btn) => {
@@ -155,22 +149,27 @@ class Shortcut {
     })
   }
   showHint() {
+    // To only show the hint if they have enough hints allowed
     if (this.hintsAllowed > 0) {
       this.hintsAllowed--
       showHintsAllowed.innerHTML = this.hintsAllowed
       this.hint()
     }
   }
-  countDown() {
-    setInterval(() => {
-      if (this.timeLimit <= 0) {
-        clearInterval((this.timeLimit = 0))
+  startTimer() {
+    // To start the visual countdown timer
+    countNer = setInterval(() => {
+      const computedStyle = getComputedStyle(progressBar)
+      const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
+      progressBar.style.setProperty(
+        '--width',
+        Math.floor(width - this.timeLimit)
+      )
+      if (width <= 0) {
+        clearInterval(countNer)
       }
-      countDownTimer.innerHTML = this.timeLimit
-      this.timeLimit -= 1
-
-      if (this.timeLimit === 0) {
-        action.innerHTML = 'hit restart to play again'
+      if (width === 0) {
+        action.innerHTML = 'hit &#8634; to play again'
         if (this.score <= 10) {
           scoreCard.innerHTML = `C'mon you can do better! You only answered ${this.score} questions correctly.`
         } else if (this.score >= 10 && this.score <= 20) {
@@ -182,7 +181,7 @@ class Shortcut {
     }, 1000)
   }
   reset() {
-    this.timeLimit = timeLimit
+    // To reset the scores
     this.score = 0
     this.hintsAllowed = hints
     showHintsAllowed.innerHTML = this.hintsAllowed
