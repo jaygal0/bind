@@ -1,13 +1,16 @@
-const action = document.getElementById('action')
+const question = document.getElementById('question')
+const questionText = document.getElementById('questionText')
+const questionNo = document.getElementById('questionNo')
 const startBtn = document.getElementById('start')
 const answer = document.getElementById('answer')
 const showHintsAllowed = document.getElementById('hintsAllowed')
 const hintBtn = document.getElementById('hint')
-const scoreCard = document.getElementById('scoreCard')
 const keyboardBtns = document.querySelectorAll('.keyboard__btns')
 const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/7d4cd8e5b9c77dbdb7c09152a44d7082d0c54f7f/shortcut.json'
-const progressBar = document.getElementsByClassName('progress-bar')[0]
+const progressBar = document.getElementsByClassName(
+  'windowCountdown__progressbar'
+)[0]
 
 // To program the game difficulty
 const hints = 5
@@ -47,18 +50,18 @@ window.onload = () => {
 // EVENT LISTENERS //////////
 // To start or restart the timer and game when the button is clicked
 startBtn.addEventListener('click', () => {
-  if (startBtn.innerText === 'start') {
+  if (startBtn.innerText === 'start game') {
     game = new Shortcut(timeCalc, hints)
     game.startGame()
     game.startTimer()
+    questionText.classList.remove('hidden')
     startBtn.innerHTML = '&#8634;'
   } else {
     clearInterval(countNer)
-    progressBar.style.setProperty('--width', 100)
+    progressBar.style.setProperty('--top', 1)
     game.startTimer()
     game.reset()
     game.startGame()
-    scoreCard.innerText = ''
   }
 })
 
@@ -88,6 +91,7 @@ class Shortcut {
     this.score = 0
     this.hintsAllowed = hints
     this.random
+    this.questionNo = 1
   }
   randomNo() {
     // To generate a random number
@@ -96,7 +100,8 @@ class Shortcut {
   startGame() {
     this.randomNo()
 
-    action.innerText = shortcut[this.random].action
+    question.innerText = shortcut[this.random].action
+    questionNo.innerText = this.questionNo
     showHintsAllowed.innerHTML = this.hintsAllowed
 
     window.addEventListener('keydown', (e) => {
@@ -108,6 +113,8 @@ class Shortcut {
         e.altKey === shortcut[this.random].altKey
       ) {
         this.score++
+        this.questionNo++
+        questionNo.innerText = this.questionNo
         this.startGame()
       }
     })
@@ -160,28 +167,26 @@ class Shortcut {
     // To start the visual countdown timer
     countNer = setInterval(() => {
       const computedStyle = getComputedStyle(progressBar)
-      const width = parseFloat(computedStyle.getPropertyValue('--width')) || 0
-      progressBar.style.setProperty(
-        '--width',
-        Math.floor(width - this.timeLimit)
-      )
-      if (width <= 0) {
+      const width = parseFloat(computedStyle.getPropertyValue('--top')) || 0
+      progressBar.style.setProperty('--top', Math.floor(width + this.timeLimit))
+      if (width >= 100) {
         clearInterval(countNer)
       }
-      if (width <= 0) {
-        action.innerHTML = 'hit &#8634; to play again'
+      if (width >= 100) {
+        question.innerHTML = 'hit &#8634; to play again'
         if (this.score <= 10) {
-          scoreCard.innerHTML = `C'mon you can do better! You only answered ${this.score} questions correctly.`
+          question.innerHTML = `C'mon you can do better! You only answered ${this.score} questions correctly.`
         } else if (this.score >= 10 && this.score <= 20) {
-          scoreCard.innerHTML = `Not bad, you answered ${this.score} questions correctly.`
+          question.innerHTML = `Not bad, you answered ${this.score} questions correctly.`
         } else if (this.score > 20) {
-          scoreCard.innerHTML = `Well done! You answered ${this.score} questions correctly.`
+          question.innerHTML = `Well done! You answered ${this.score} questions correctly.`
         }
       }
     }, 1000)
   }
   reset() {
     // To reset the scores
+    this.questionNo = 1
     this.score = 0
     this.hintsAllowed = hints
     showHintsAllowed.innerHTML = this.hintsAllowed
