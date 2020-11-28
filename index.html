@@ -6,6 +6,11 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bind: Remember Every Keyboard Shortcut</title>
@@ -18,12 +23,17 @@
         </h1>
       </div>
       <div class="windowBind__box--text">
-        <h3 class="windowBind__header3 hidden" id="questionText">
-          question
-          <span id="questionNo">1</span>
-        </h3>
-        <h2 class="windowBind__heading" id="question"></h2>
-        <p class="windowBind__text">using your keyboard, type in the answer</p>
+        <div class="windowBind__logo"></div>
+        <div class="windowBind__box--right">
+          <h3 class="windowBind__header3 hidden" id="questionText">
+            question
+            <span id="questionNo">1</span>
+          </h3>
+          <h2 class="windowBind__heading" id="question"></h2>
+          <p class="windowBind__text">
+            Using your keyboard, type in the answer
+          </p>
+        </div>
       </div>
       <div class="windowBind__box--hint">
         <div class="windowBind__hintAnswer" id="answer"></div>
@@ -31,7 +41,7 @@
           <button class="btn" id="hint">
             show hints (<span id="hintsAllowed">5</span>)
           </button>
-          <button class="btn" id="start">start game</button>
+          <button class="windowBind__start btn" id="start">start game</button>
         </div>
       </div>
     </div>
