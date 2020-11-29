@@ -50,12 +50,12 @@ window.onload = () => {
 // EVENT LISTENERS //////////
 // To start or restart the timer and game when the button is clicked
 startBtn.addEventListener('click', () => {
-  if (startBtn.innerText === 'start game') {
+  if (startBtn.innerText === 'START GAME') {
     game = new Shortcut(timeCalc, hints)
     game.startGame()
     game.startTimer()
     questionText.classList.remove('hidden')
-    startBtn.innerHTML = '&#8634;'
+    startBtn.innerHTML = 'reset'
   } else {
     clearInterval(countNer)
     progressBar.style.setProperty('--top', 1)

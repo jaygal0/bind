@@ -7,8 +7,9 @@
   <head>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
     <meta charset="UTF-8" />
@@ -17,40 +18,60 @@
   </head>
   <body class="container">
     <div class="windowBind windowBorder">
-      <div class="window__topbar">
+      <div class="windowBind__header">
         <h1 class="windowBind__header1">
           bind: remember every keyboard shortcut
         </h1>
+        <img src="/img/closeIcons.png" alt="" class="windowBind__close" />
       </div>
-      <div class="windowBind__box--text">
-        <div class="windowBind__logo"></div>
-        <div class="windowBind__box--right">
-          <h3 class="windowBind__header3 hidden" id="questionText">
-            question
-            <span id="questionNo">1</span>
-          </h3>
-          <h2 class="windowBind__heading" id="question"></h2>
-          <p class="windowBind__text">
-            Using your keyboard, type in the answer
-          </p>
-        </div>
-      </div>
-      <div class="windowBind__box--hint">
-        <div class="windowBind__hintAnswer" id="answer"></div>
-        <div class="windowBind__box--btns">
-          <button class="btn" id="hint">
-            show hints (<span id="hintsAllowed">5</span>)
-          </button>
-          <button class="windowBind__start btn" id="start">start game</button>
+      <div class="windowBind__text">
+        <div class="windowBind__icon"></div>
+        <div class="windowBind__right">
+          <div class="windowBind__question">
+            <h3 class="windowBind__header3 hidden" id="questionText">
+              question
+              <span id="questionNo">1</span>
+            </h3>
+            <h2 class="windowBind__heading" id="question">
+              hit start to begin
+            </h2>
+            <p class="windowBind__para">
+              Using your keyboard, type in the answer
+            </p>
+          </div>
+          <div class="windowBind__hints">
+            <div class="windowBind__answer" id="answer"></div>
+            <div class="windowBind__btns">
+              <button class="windowBind__hintBtn btn" id="hint">
+                show hints (<span id="hintsAllowed">5</span>)
+              </button>
+              <button class="windowBind__start btn" id="start">
+                start game
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="windowCountdown windowBorder">
-      <h4 class="winddowCountdown__header">countdown</h4>
+      <div class="windowCountdown__header">
+        <h4 class="windowCountdown__header1">countdown</h4>
+        <img class="windowCountdown__close" src="/img/closeIcons.png" alt="" />
+      </div>
       <div class="windowCountdown__progressbar" style="--top: 1"></div>
     </div>
+
     <div class="windowKeyboard windowBorder">
-      <h4 class="windowKeyboard__header">interactive keyboard</h4>
+      <div class="windowKeyboard__header">
+        <h4 class="windowKeyboard__header1">interactive keyboard</h4>
+        <img
+          class="windowKeyboard__close"
+          src="/img/closeIcons.png"
+          alt=""
+          srcset=""
+        />
+      </div>
       <div id="keyboard" class="windowKeyboard__keyboard">
         <div class="keyboard__row1">
           <div class="keyboard__btns" data-code="Escape">esc</div>
