@@ -6,6 +6,7 @@ const answer = document.getElementById('answer')
 const showHintsAllowed = document.getElementById('hintsAllowed')
 const hintBtn = document.getElementById('hint')
 const keyboardBtns = document.querySelectorAll('.keyboard__btns')
+const windowBindPara = document.getElementById('windowBindPara')
 const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/7d4cd8e5b9c77dbdb7c09152a44d7082d0c54f7f/shortcut.json'
 const progressBar = document.getElementsByClassName(
@@ -59,6 +60,7 @@ startBtn.addEventListener('click', () => {
   } else {
     clearInterval(countNer)
     progressBar.style.setProperty('--top', 1)
+    windowBindPara.innerText = 'type in your answer using your keyboard'
     game.startTimer()
     game.reset()
     game.startGame()
@@ -168,18 +170,21 @@ class Shortcut {
     countNer = setInterval(() => {
       const computedStyle = getComputedStyle(progressBar)
       const width = parseFloat(computedStyle.getPropertyValue('--top')) || 0
-      progressBar.style.setProperty('--top', Math.floor(width + this.timeLimit))
-      if (width >= 100) {
+      progressBar.style.setProperty('--top', Math.round(width + this.timeLimit))
+      if (width >= 93) {
         clearInterval(countNer)
       }
-      if (width >= 100) {
-        question.innerHTML = 'hit &#8634; to play again'
+      if (width >= 93) {
+        question.innerHTML = 'hit reset to play again'
         if (this.score <= 10) {
-          question.innerHTML = `C'mon you can do better! You only answered ${this.score} questions correctly.`
+          question.innerHTML = `You only answered ${this.score} questions correctly.`
+          windowBindPara.innerText = 'better luck next time'
         } else if (this.score >= 10 && this.score <= 20) {
-          question.innerHTML = `Not bad, you answered ${this.score} questions correctly.`
+          question.innerHTML = `You answered ${this.score} questions correctly.`
+          windowBindPara.innerText = 'Good job, but you can do better'
         } else if (this.score > 20) {
-          question.innerHTML = `Well done! You answered ${this.score} questions correctly.`
+          question.innerHTML = `You answered ${this.score} questions correctly.`
+          windowBindPara.innerText = 'well done!'
         }
       }
     }, 1000)

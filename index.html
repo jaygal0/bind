@@ -1,5 +1,5 @@
-<!-- TODO Finish styling the windowBind DIV -->
-<!-- TODO Style each div in order of the HTML -->
+<!-- TODO Sort out dark mode -->
+<!-- TODO resize keyboard -->
 <!-- TODO Find other useful shortcuts that can be used in the browser -->
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
         <h1 class="windowBind__header1">
           bind: remember every keyboard shortcut
         </h1>
-        <img src="/img/closeIcons.png" alt="" class="windowBind__close" />
+        <img src="/img/closeIcons.svg" alt="" class="windowBind__close" />
       </div>
       <div class="windowBind__text">
         <div class="windowBind__icon"></div>
@@ -33,10 +33,10 @@
               <span id="questionNo">1</span>
             </h3>
             <h2 class="windowBind__heading" id="question">
-              hit start to begin
+              type in your answer using your keyboard
             </h2>
-            <p class="windowBind__para">
-              Using your keyboard, type in the answer
+            <p class="windowBind__para" id="windowBindPara">
+              hit start to begin
             </p>
           </div>
           <div class="windowBind__hints">
@@ -57,9 +57,9 @@
     <div class="windowCountdown windowBorder">
       <div class="windowCountdown__header">
         <h4 class="windowCountdown__header1">countdown</h4>
-        <img class="windowCountdown__close" src="/img/closeIcons.png" alt="" />
+        <img class="windowCountdown__close" src="/img/closeIcons.svg" alt="" />
       </div>
-      <div class="windowCountdown__progressbar" style="--top: 1"></div>
+      <div class="windowCountdown__progressbar" style="--top: 0"></div>
     </div>
 
     <div class="windowKeyboard windowBorder">
@@ -67,26 +67,26 @@
         <h4 class="windowKeyboard__header1">interactive keyboard</h4>
         <img
           class="windowKeyboard__close"
-          src="/img/closeIcons.png"
+          src="/img/closeIcons.svg"
           alt=""
           srcset=""
         />
       </div>
       <div id="keyboard" class="windowKeyboard__keyboard">
         <div class="keyboard__row1">
-          <div class="keyboard__btns" data-code="Escape">esc</div>
-          <div class="keyboard__btns" data-code="F1">f1</div>
-          <div class="keyboard__btns" data-code="F2">f2</div>
-          <div class="keyboard__btns" data-code="F3">f3</div>
-          <div class="keyboard__btns" data-code="F4">f4</div>
-          <div class="keyboard__btns" data-code="F5">f5</div>
-          <div class="keyboard__btns" data-code="F6">f6</div>
-          <div class="keyboard__btns" data-code="F7">f7</div>
-          <div class="keyboard__btns" data-code="F8">f8</div>
-          <div class="keyboard__btns" data-code="F9">f9</div>
-          <div class="keyboard__btns" data-code="F10">f10</div>
-          <div class="keyboard__btns" data-code="F11">f11</div>
-          <div class="keyboard__btns" data-code="F12">f12</div>
+          <div class="keyboard__btns short" data-code="Escape">esc</div>
+          <div class="keyboard__btns short" data-code="F1">f1</div>
+          <div class="keyboard__btns short" data-code="F2">f2</div>
+          <div class="keyboard__btns short" data-code="F3">f3</div>
+          <div class="keyboard__btns short" data-code="F4">f4</div>
+          <div class="keyboard__btns short" data-code="F5">f5</div>
+          <div class="keyboard__btns short" data-code="F6">f6</div>
+          <div class="keyboard__btns short" data-code="F7">f7</div>
+          <div class="keyboard__btns short" data-code="F8">f8</div>
+          <div class="keyboard__btns short" data-code="F9">f9</div>
+          <div class="keyboard__btns short" data-code="F10">f10</div>
+          <div class="keyboard__btns short" data-code="F11">f11</div>
+          <div class="keyboard__btns short" data-code="F12">f12</div>
         </div>
         <div class="keyboard__row2">
           <div class="keyboard__btns" data-code="Backquote">`</div>
@@ -112,7 +112,7 @@
           <div class="keyboard__btns" data-code="KeyW">w</div>
           <div class="keyboard__btns" data-code="KeyE">e</div>
           <div class="keyboard__btns" data-code="KeyR">r</div>
-          <div class="keyboard__btns" data-code="Keyt">t</div>
+          <div class="keyboard__btns" data-code="KeyT">t</div>
           <div class="keyboard__btns" data-code="KeyY">y</div>
           <div class="keyboard__btns" data-code="KeyU">u</div>
           <div class="keyboard__btns" data-code="KeyI">i</div>
@@ -163,9 +163,31 @@
         </div>
       </div>
     </div>
-    <div class="music">
-      <h4 class="music__header">music</h4>
+
+    <div class="windowMusic windowBorder">
+      <div class="windowMusic__header">
+        <h4 class="windowMusic__header4">music</h4>
+      </div>
+      <img class="windowMusic__icon" src="/img/noMusic.svg" alt="" srcset="" />
     </div>
+    <img
+      class="backgroundLeft"
+      src="/img/backgroundLeft.svg"
+      alt=""
+      srcset=""
+    />
+    <img
+      class="backgroundRight"
+      src="/img/backgroundRight.svg"
+      alt=""
+      srcset=""
+    />
+
+    <div class="dark" id="darkMode">
+      <img class="dark__icon" src="/img/darkMode.svg" alt="" srcset="" />
+      <h3 class="dark__text">dark mode</h3>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>
