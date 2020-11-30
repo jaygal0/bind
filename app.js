@@ -7,6 +7,8 @@ const showHintsAllowed = document.getElementById('hintsAllowed')
 const hintBtn = document.getElementById('hint')
 const keyboardBtns = document.querySelectorAll('.keyboard__btns')
 const windowBindPara = document.getElementById('windowBindPara')
+const darkMode = document.getElementById('darkMode')
+const gameOver = document.getElementById('gameOver')
 const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/7d4cd8e5b9c77dbdb7c09152a44d7082d0c54f7f/shortcut.json'
 const progressBar = document.getElementsByClassName(
@@ -57,8 +59,11 @@ startBtn.addEventListener('click', () => {
     game.startTimer()
     questionText.classList.remove('hidden')
     startBtn.innerHTML = 'reset'
+    windowBindPara.innerText = 'type in your answer using your keyboard'
   } else {
     clearInterval(countNer)
+    questionText.classList.remove('remove')
+    gameOver.classList.add('remove')
     progressBar.style.setProperty('--top', 1)
     windowBindPara.innerText = 'type in your answer using your keyboard'
     game.startTimer()
@@ -112,7 +117,8 @@ class Shortcut {
         e.code === shortcut[this.random].code &&
         e.ctrlKey === shortcut[this.random].ctrlKey &&
         e.shiftKey === shortcut[this.random].shiftKey &&
-        e.altKey === shortcut[this.random].altKey
+        e.altKey === shortcut[this.random].altKey &&
+        gameOver.classList.contains('remove')
       ) {
         this.score++
         this.questionNo++
@@ -176,6 +182,9 @@ class Shortcut {
       }
       if (width >= 93) {
         question.innerHTML = 'hit reset to play again'
+        questionText.classList.add('remove')
+        gameOver.classList.remove('remove')
+
         if (this.score <= 10) {
           question.innerHTML = `You only answered ${this.score} questions correctly.`
           windowBindPara.innerText = 'better luck next time'
@@ -197,3 +206,9 @@ class Shortcut {
     showHintsAllowed.innerHTML = this.hintsAllowed
   }
 }
+
+const darkmode = new Darkmode()
+
+darkMode.addEventListener('click', () => {
+  darkmode.toggle()
+})

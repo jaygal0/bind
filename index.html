@@ -1,4 +1,4 @@
-<!-- TODO Sort out dark mode -->
+<!-- TODO Figure out if I can add a way to show correct/wrong input -->
 <!-- TODO resize keyboard -->
 <!-- TODO Find other useful shortcuts that can be used in the browser -->
 
@@ -30,7 +30,10 @@
           <div class="windowBind__question">
             <h3 class="windowBind__header3 hidden" id="questionText">
               question
-              <span id="questionNo">1</span>
+              <span id="questionNo">1</span> - how do you
+            </h3>
+            <h3 class="windowBind__header3alt remove" id="gameOver">
+              game over
             </h3>
             <h2 class="windowBind__heading" id="question">
               type in your answer using your keyboard
@@ -177,7 +180,7 @@
       srcset=""
     />
     <img
-      class="backgroundRight"
+      class="backgroundRight darkmode-ignore"
       src="/img/backgroundRight.svg"
       alt=""
       srcset=""
@@ -188,6 +191,7 @@
       <h3 class="dark__text">dark mode</h3>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

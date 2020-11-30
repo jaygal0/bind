@@ -11,7 +11,6 @@ html {
 body {
   box-sizing: border-box;
   overflow: hidden;
-  background: #fcf8e9;
 }
 
 .container {
@@ -92,7 +91,15 @@ body {
   text-transform: capitalize;
   color: #363636;
   margin-top: 5px;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.windowBind__header3alt {
+  text-transform: capitalize;
+  color: #363636;
+  margin-top: 5px;
+  font-size: 2rem;
   font-weight: 300;
 }
 
@@ -124,16 +131,24 @@ body {
   text-transform: capitalize;
 }
 
+.windowBind__hintBtn {
+  border: solid black 5px;
+  background: #fcf8e9;
+  color: black;
+  cursor: pointer;
+}
+
 .windowBind__start {
   text-transform: uppercase;
   font-weight: 900;
   margin-left: 15px;
+  border: solid black 5px;
+  cursor: pointer;
 }
 
 .windowCountdown {
   width: 18.95vw;
   height: 73.82vh;
-  /* height: 100%; */
   background: #fcf8e9;
   position: absolute;
   top: 19.14vh;
@@ -297,6 +312,10 @@ body {
   margin: 2em 5rem;
 }
 
+.windowMusic__icon:hover {
+  cursor: pointer;
+}
+
 .backgroundLeft {
   z-index: -1;
   width: 50%;
@@ -321,6 +340,10 @@ body {
   right: 5rem;
 }
 
+.dark:hover {
+  cursor: pointer;
+}
+
 .dark__icon {
   width: 40%;
   margin: 0 auto;
@@ -334,4 +357,17 @@ body {
 
 .hidden {
   opacity: 0;
+}
+
+.remove {
+  display: none;
+}
+
+.darkmode-layer,
+.darkmode-toggle {
+  z-index: 500;
+}
+
+.darkmode-background {
+  background: #fcf8e9 !important;
 }
