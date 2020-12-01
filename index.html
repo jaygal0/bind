@@ -1,6 +1,10 @@
 <!-- TODO Figure out if I can add a way to show correct/wrong input -->
 <!-- TODO resize keyboard -->
+<!-- TODO Add icons -->
+<!-- TODO Figure out max width media query -->
+<!-- TODO Upoad to netlify -->
 <!-- TODO Find other useful shortcuts that can be used in the browser -->
+<!-- TODO Design logo -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +18,13 @@
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bind: Remember Every Keyboard Shortcut</title>
+    <title>Bind: Remember Essential Keyboard Shortcuts</title>
   </head>
   <body class="container">
     <div class="windowBind windowBorder">
       <div class="windowBind__header">
         <h1 class="windowBind__header1">
-          bind: remember every keyboard shortcut
+          bind: remember essential keyboard shortcuts
         </h1>
         <img src="/img/closeIcons.svg" alt="" class="windowBind__close" />
       </div>
@@ -33,20 +37,20 @@
               <span id="questionNo">1</span> - how do you
             </h3>
             <h3 class="windowBind__header3alt remove" id="gameOver">
-              game over
+              game over. play again by hitting 'reset'.
             </h3>
             <h2 class="windowBind__heading" id="question">
               type in your answer using your keyboard
             </h2>
             <p class="windowBind__para" id="windowBindPara">
-              hit start to begin
+              hit 'start game' to begin
             </p>
           </div>
           <div class="windowBind__hints">
             <div class="windowBind__answer" id="answer"></div>
             <div class="windowBind__btns">
               <button class="windowBind__hintBtn btn" id="hint">
-                show hints (<span id="hintsAllowed">5</span>)
+                show hint (<span id="hintsAllowed">5</span>)
               </button>
               <button class="windowBind__start btn" id="start">
                 start game

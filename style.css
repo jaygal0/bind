@@ -136,6 +136,16 @@ body {
   background: #fcf8e9;
   color: black;
   cursor: pointer;
+  transition: all ease 0.5s;
+}
+
+.windowBind__hintBtn:hover {
+  background: black;
+  color: white;
+}
+
+.windowBind__hintBtn:active {
+  scale: 0.8;
 }
 
 .windowBind__start {
@@ -144,6 +154,16 @@ body {
   margin-left: 15px;
   border: solid black 5px;
   cursor: pointer;
+  transition: all ease 0.5s;
+}
+
+.windowBind__start:hover {
+  background: #ffcb77;
+  color: black;
+}
+
+.windowBind__start:active {
+  scale: 0.8;
 }
 
 .windowCountdown {
@@ -338,10 +358,16 @@ body {
   position: absolute;
   top: 5rem;
   right: 5rem;
+  transform: all ease 0.8s;
 }
 
 .dark:hover {
   cursor: pointer;
+  color: rgba(63, 62, 62, 0.842);
+}
+
+.dark:active {
+  scale: 0.8;
 }
 
 .dark__icon {

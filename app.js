@@ -207,6 +207,7 @@ class Shortcut {
   }
 }
 
+// For darkmode.js
 const darkmode = new Darkmode()
 
 darkMode.addEventListener('click', () => {
