@@ -327,13 +327,70 @@ body {
   font-size: 2rem;
 }
 
-.windowMusic__icon {
+.windowMusic__musicIcon {
   width: 4%;
   margin: 2em 5rem;
 }
 
-.windowMusic__icon:hover {
+.windowMusic__noMusicIcon {
+  width: 4%;
+  margin: 2em 5rem;
+}
+
+.windowMusic__musicIcon:hover {
   cursor: pointer;
+  scale: 1.1;
+}
+
+.windowMusic__noMusicIcon:hover {
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.windowMusic__musicIcon:active {
+  cursor: pointer;
+  scale: 0.9;
+}
+
+.windowMusic__noMusicIcon:active {
+  cursor: pointer;
+  scale: 0.9;
+}
+
+.icons {
+  z-index: -1;
+}
+
+.computer {
+  position: absolute;
+  top: 5vh;
+  left: 4vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.computer__text {
+  margin-top: -8px;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.internet {
+  position: absolute;
+  top: 55vh;
+  left: 4vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.internet {
+  margin-top: -8px;
+  font-size: 1.5rem;
+  text-transform: capitalize;
 }
 
 .backgroundLeft {
@@ -363,11 +420,11 @@ body {
 
 .dark:hover {
   cursor: pointer;
-  color: rgba(63, 62, 62, 0.842);
+  scale: 1.05;
 }
 
 .dark:active {
-  scale: 0.8;
+  scale: 0.9;
 }
 
 .dark__icon {
@@ -383,10 +440,12 @@ body {
 
 .hidden {
   opacity: 0;
+  scale: 0;
 }
 
 .remove {
   display: none;
+  scale: 0;
 }
 
 .darkmode-layer,

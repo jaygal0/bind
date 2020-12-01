@@ -9,6 +9,9 @@ const keyboardBtns = document.querySelectorAll('.keyboard__btns')
 const windowBindPara = document.getElementById('windowBindPara')
 const darkMode = document.getElementById('darkMode')
 const gameOver = document.getElementById('gameOver')
+const music = document.getElementById('music')
+const musicIcon = document.getElementById('musicIcon')
+const noMusicIcon = document.getElementById('noMusicIcon')
 const url =
   'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/7d4cd8e5b9c77dbdb7c09152a44d7082d0c54f7f/shortcut.json'
 const progressBar = document.getElementsByClassName(
@@ -89,6 +92,12 @@ keyboardBtns.forEach((btn) => {
       btn.classList.remove('activeBtn')
     }
   })
+})
+
+// To toggle the music icon
+music.addEventListener('click', () => {
+  musicIcon.classList.toggle('remove')
+  noMusicIcon.classList.toggle('remove')
 })
 
 // CLASS //////////
