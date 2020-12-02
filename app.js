@@ -13,7 +13,7 @@ const music = document.getElementById('music')
 const musicIcon = document.getElementById('musicIcon')
 const noMusicIcon = document.getElementById('noMusicIcon')
 const url =
-  'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/7d4cd8e5b9c77dbdb7c09152a44d7082d0c54f7f/shortcut.json'
+  'https://gist.githubusercontent.com/jaygal0/d3619c250da85a7c0aeee6b33f07ad4d/raw/6f1bbf7947339ac8767cb5ab2e157f4854a2cb31/shortcut.json'
 const progressBar = document.getElementsByClassName(
   'windowCountdown__progressbar'
 )[0]
@@ -77,7 +77,9 @@ startBtn.addEventListener('click', () => {
 
 // To show the keyboard hint when the hint button is pressed
 hintBtn.addEventListener('click', () => {
-  game.showHint()
+  if (gameOver.classList.contains('remove')) {
+    game.showHint()
+  }
 })
 
 // To show the user interacting with the keyboard

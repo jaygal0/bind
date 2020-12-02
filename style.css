@@ -228,6 +228,8 @@ body {
   height: 48.33vw;
   background: #fcf8e9;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
 }
 
 .windowKeyboard__header {
@@ -249,8 +251,9 @@ body {
 }
 
 .windowKeyboard__keyboard {
-  margin: 20px auto;
-  width: 75%;
+  margin-top: 20px;
+  width: 85%;
+  align-self: center;
 }
 
 .keyboard__row1,
@@ -260,6 +263,7 @@ body {
 .keyboard__row5,
 .keyboard__row6 {
   display: flex;
+  justify-content: center;
 }
 
 .keybaord__row1 {
@@ -387,8 +391,24 @@ body {
   align-items: center;
 }
 
-.internet {
-  margin-top: -8px;
+.internet__text {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.bin {
+  position: absolute;
+  top: 80vh;
+  right: 5.5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bin__text {
+  margin-top: 0.5rem;
   font-size: 1.5rem;
   text-transform: capitalize;
 }
@@ -414,7 +434,7 @@ body {
   flex-direction: column;
   position: absolute;
   top: 5rem;
-  right: 5rem;
+  right: 7vw;
   transform: all ease 0.8s;
 }
 
