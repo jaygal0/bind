@@ -19,6 +19,7 @@ const progressBar = document.getElementsByClassName(
 )[0]
 
 // To select the pseudo element from the countdown timer
+const progressBarRed = document.querySelector('.windowCountdown__progressbar')
 var UID = {
   _current: 0,
   getNew: function () {
@@ -143,7 +144,6 @@ class Shortcut {
   }
   startGame() {
     this.randomNo()
-
     question.innerText = shortcut[this.random].action
     questionNo.innerText = this.questionNo
     showHintsAllowed.innerHTML = this.hintsAllowed
@@ -210,11 +210,15 @@ class Shortcut {
   }
   startTimer() {
     // To start the visual countdown timer
+    progressBarRed.pseudoStyle('before', 'background-color', '#b7fcf8')
     countNer = setInterval(() => {
       const computedStyle = getComputedStyle(progressBar)
       const width = parseFloat(computedStyle.getPropertyValue('--top')) || 0
+      const percent = timeLimitSec / 100
+      const a = percent * 70
+      const b = percent * 30
+      const c = percent * 10
       progressBar.style.setProperty('--top', Math.round(width + this.timeLimit))
-      console.log(width)
       if (width >= 93) {
         clearInterval(countNer)
       }
@@ -223,20 +227,19 @@ class Shortcut {
         questionText.classList.add('remove')
         gameOver.classList.remove('remove')
 
-        if (this.score <= 10) {
+        if (this.score <= c) {
           question.innerHTML = `You only answered ${this.score} questions correctly.`
-          windowBindPara.innerText = 'better luck next time'
-        } else if (this.score >= 10 && this.score <= 20) {
+          windowBindPara.innerText = 'better luck next time!'
+        } else if (this.score >= b && this.score <= c) {
           question.innerHTML = `You answered ${this.score} questions correctly.`
-          windowBindPara.innerText = 'Good job, but you can do better'
-        } else if (this.score > 20) {
+          windowBindPara.innerText = 'Good job, but you can do better!'
+        } else if (this.score > a) {
           question.innerHTML = `You answered ${this.score} questions correctly.`
-          windowBindPara.innerText = 'well done!'
+          windowBindPara.innerText = 'well done! keep it up!'
         }
       }
-      if (width >= 60) {
-        const test = document.querySelector('.windowCountdown__progressbar')
-        test.pseudoStyle('before', 'background-color', '#FD7B7B')
+      if (width >= 50) {
+        progressBarRed.pseudoStyle('before', 'background-color', '#FD7B7B')
       }
     }, 1000)
   }
