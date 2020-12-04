@@ -229,7 +229,7 @@ class Shortcut {
         if (this.score <= c) {
           question.innerHTML = `You only answered ${this.score} questions correctly.`
           windowBindPara.innerText = 'better luck next time!'
-        } else if (this.score >= b && this.score <= c) {
+        } else if (this.score >= b && this.score <= a) {
           question.innerHTML = `You answered ${this.score} questions correctly.`
           windowBindPara.innerText = 'Good job, but you can do better!'
         } else if (this.score > a) {
