@@ -20,7 +20,7 @@ const progressBar = document.getElementsByClassName(
 
 // To program the game difficulty
 const hints = 5
-const timeLimitSec = 30
+const timeLimitSec = 90
 const timeCalc = 100 / timeLimitSec
 
 // For the timer
