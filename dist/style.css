@@ -439,7 +439,7 @@ body {
   position: absolute;
   top: 5rem;
   right: 7vw;
-  transform: all ease 0.8s;
+  transition: all ease 0.8s;
 }
 
 .dark:hover {

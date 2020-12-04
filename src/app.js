@@ -18,6 +18,32 @@ const progressBar = document.getElementsByClassName(
   'windowCountdown__progressbar'
 )[0]
 
+// To select the pseudo element from the countdown timer
+var UID = {
+  _current: 0,
+  getNew: function () {
+    this._current++
+    return this._current
+  },
+}
+
+HTMLElement.prototype.pseudoStyle = function (element, prop, value) {
+  var _this = this
+  var _sheetId = 'pseudoStyles'
+  var _head = document.head || document.getElementsByTagName('head')[0]
+  var _sheet =
+    document.getElementById(_sheetId) || document.createElement('style')
+  _sheet.id = _sheetId
+  var className = 'pseudoStyle' + UID.getNew()
+
+  _this.className += ' ' + className
+
+  _sheet.innerHTML +=
+    '\n.' + className + ':' + element + '{' + prop + ':' + value + '}'
+  _head.appendChild(_sheet)
+  return this
+}
+
 // To program the game difficulty
 const hints = 5
 const timeLimitSec = 90
@@ -188,6 +214,7 @@ class Shortcut {
       const computedStyle = getComputedStyle(progressBar)
       const width = parseFloat(computedStyle.getPropertyValue('--top')) || 0
       progressBar.style.setProperty('--top', Math.round(width + this.timeLimit))
+      console.log(width)
       if (width >= 93) {
         clearInterval(countNer)
       }
@@ -206,6 +233,10 @@ class Shortcut {
           question.innerHTML = `You answered ${this.score} questions correctly.`
           windowBindPara.innerText = 'well done!'
         }
+      }
+      if (width >= 60) {
+        const test = document.querySelector('.windowCountdown__progressbar')
+        test.pseudoStyle('before', 'background-color', '#FD7B7B')
       }
     }, 1000)
   }
