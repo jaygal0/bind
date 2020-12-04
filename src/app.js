@@ -223,7 +223,6 @@ class Shortcut {
         clearInterval(countNer)
       }
       if (width >= 93) {
-        question.innerHTML = 'hit reset to play again'
         questionText.classList.add('remove')
         gameOver.classList.remove('remove')
 
